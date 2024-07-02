@@ -22,60 +22,31 @@
             <column name="location" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="organizer" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="category" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <!-- Add more columns as needed -->
         </createTable>
     </changeSet>
 
-<!--    <changeSet id="2" author="system">-->
-<!--        <createTable tableName="attendee">-->
-<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
-<!--                <constraints primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="name" type="VARCHAR(255)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="email" type="VARCHAR(255)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="ticket_type" type="VARCHAR(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
-
-<!--    <changeSet id="3" author="system">-->
-<!--        <createTable tableName="sponsor">-->
-<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
-<!--                <constraints primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="name" type="VARCHAR(255)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="package_type" type="VARCHAR(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
-
-<!--    <changeSet id="4" author="system">-->
-<!--        <createTable tableName="exhibitor">-->
-<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
-<!--                <constraints primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="name" type="VARCHAR(255)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="booth_number" type="VARCHAR(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
+    <changeSet id="2" author="system">
+        <createTable tableName="attendee">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ticket_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 
 </databaseChangeLog>

@@ -1,8 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/event_app
+    username: event_app
+    password: event_app
+    driver-class-name: org.postgresql.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: none  # Disable Hibernate auto DDL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
-spring.datasource.username=postgress
-spring.datasource.password=eventapp
-spring.datasource.driver-class-name=org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
 
-spring.jpa.hibernate.ddl-auto=update
+  logging:
+    level:
+      org:
+        springframework: DEBUG
+      com:
+        tharanga: DEBUG

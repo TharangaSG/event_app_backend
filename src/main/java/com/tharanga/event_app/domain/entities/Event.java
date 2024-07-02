@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 
-public class EventEntity {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
