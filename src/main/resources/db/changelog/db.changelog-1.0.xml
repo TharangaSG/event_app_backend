@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="system">
+        <createTable tableName="event">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <!-- Add more columns as needed -->
+        </createTable>
+    </changeSet>
+
+<!--    <changeSet id="2" author="system">-->
+<!--        <createTable tableName="attendee">-->
+<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="VARCHAR(255)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="email" type="VARCHAR(255)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="ticket_type" type="VARCHAR(50)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="3" author="system">-->
+<!--        <createTable tableName="sponsor">-->
+<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="VARCHAR(255)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="package_type" type="VARCHAR(50)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet id="4" author="system">-->
+<!--        <createTable tableName="exhibitor">-->
+<!--            <column name="id" type="BIGINT" autoIncrement="true">-->
+<!--                <constraints primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="VARCHAR(255)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="booth_number" type="VARCHAR(50)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            &lt;!&ndash; Add more columns as needed &ndash;&gt;-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+</databaseChangeLog>
