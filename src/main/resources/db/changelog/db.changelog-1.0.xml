@@ -28,6 +28,9 @@
             <column name="category" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="event_image" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

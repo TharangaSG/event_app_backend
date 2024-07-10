@@ -21,3 +21,10 @@ spring:
         springframework: DEBUG
       com:
         tharanga: DEBUG
+
+
+project:
+  event: event/
+
+base:
+  url: "http://localhost:8080"
