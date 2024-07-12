@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -29,7 +28,7 @@ public class FileServiceImpl implements FileService {
         }
 
         // Copy the file to the specified path
-        Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(file.getInputStream(), Paths.get(filePath));
 
         // Return the name of the uploaded file
         return fileName;

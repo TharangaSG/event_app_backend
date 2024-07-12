@@ -25,9 +25,19 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    private EventDto convertToEventDto(String eventDtoObj) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());  // Register the JavaTimeModule because using date and time
+        return objectMapper.readValue(eventDtoObj, EventDto.class);
+    }
     @GetMapping(path="/all_events")
     public List<EventDto> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @GetMapping(path="/{eventId}")
+    public ResponseEntity<EventDto> getEvent(@PathVariable Long eventId){
+        return ResponseEntity.ok(eventService.getEvent(eventId));
     }
 
     @PostMapping(path="/all_events")
@@ -37,9 +47,19 @@ public class EventController {
         return new ResponseEntity<>(eventService.createEvent(dto, file), HttpStatus.CREATED);
     }
 
-    private EventDto convertToEventDto(String eventDtoObj) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());  // Register the JavaTimeModule because using date and time
-        return objectMapper.readValue(eventDtoObj, EventDto.class);
+    @PutMapping(path="/update/{eventId}")
+    public ResponseEntity<EventDto> updateEvent(@PathVariable Long eventId,
+                                                @RequestPart MultipartFile file,
+                                                @RequestPart  String eventDtoObj) throws IOException {
+        if (file.isEmpty()){
+            file = null;
+        }
+        EventDto eventDto = convertToEventDto(eventDtoObj);
+        return ResponseEntity.ok(eventService.updateEvent(eventId, eventDto, file));
+    }
+
+    @DeleteMapping("/delete/{eventId}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long eventId) throws IOException {
+        return ResponseEntity.ok(eventService.deleteEvent(eventId));
     }
 }

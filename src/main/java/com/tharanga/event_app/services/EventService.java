@@ -4,9 +4,17 @@ import com.tharanga.event_app.domain.dto.EventDto;
 import com.tharanga.event_app.domain.entities.Event;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EventService {
     List<EventDto> getAllEvents();
-    EventDto createEvent(EventDto eventDto, MultipartFile file);
+
+    EventDto getEvent(Long eventId);
+
+    EventDto createEvent(EventDto eventDto, MultipartFile file) throws IOException;
+
+    EventDto updateEvent(Long eventId, EventDto eventDto, MultipartFile file) throws IOException;
+
+    String deleteEvent(Long eventId) throws IOException;
 }
