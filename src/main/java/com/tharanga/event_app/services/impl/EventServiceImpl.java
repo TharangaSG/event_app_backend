@@ -1,6 +1,7 @@
 package com.tharanga.event_app.services.impl;
 
 import com.tharanga.event_app.domain.dto.EventDto;
+import com.tharanga.event_app.domain.dto.EventPageResponse;
 import com.tharanga.event_app.domain.entities.Event;
 import com.tharanga.event_app.exceptions.EventNotFoundException;
 import com.tharanga.event_app.exceptions.FileExistsException;
@@ -9,6 +10,10 @@ import com.tharanga.event_app.repositories.EventRepository;
 import com.tharanga.event_app.services.EventService;
 import com.tharanga.event_app.services.FileService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -137,6 +142,53 @@ public class EventServiceImpl implements EventService {
             eventRepository.delete(event);
 
             return ("Event deleted with id = " + id);
+    }
+
+    @Override
+    public EventPageResponse getAllEventsWithPagination(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<Event> eventPages = eventRepository.findAll(pageable);
+        List<Event> events = eventPages.getContent();
+
+        List<EventDto> eventDtos = new ArrayList<>();
+
+        for (Event event : events) {
+            String imageUrl = baseUrl + "/file/" + event.getEventImage();
+            EventDto eventDto = eventMapper.mapTo(event);
+            eventDto.setImageUrl(imageUrl);
+            eventDtos.add(eventDto);
+        }
+
+        return new EventPageResponse(eventDtos, pageNumber, pageSize,
+                                    eventPages.getTotalElements(),
+                                    eventPages.getTotalPages(),
+                                    eventPages.isLast());
+    }
+
+    @Override
+    public EventPageResponse getAllEventsWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String sortBy, String dir) {
+        Sort sort = dir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending()
+                                                             :Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+
+        Page<Event> eventPages = eventRepository.findAll(pageable);
+        List<Event> events = eventPages.getContent();
+
+        List<EventDto> eventDtos = new ArrayList<>();
+
+        for (Event event : events) {
+            String imageUrl = baseUrl + "/file/" + event.getEventImage();
+            EventDto eventDto = eventMapper.mapTo(event);
+            eventDto.setImageUrl(imageUrl);
+            eventDtos.add(eventDto);
+        }
+
+        return new EventPageResponse(eventDtos, pageNumber, pageSize,
+                eventPages.getTotalElements(),
+                eventPages.getTotalPages(),
+                eventPages.isLast());
     }
 }
 

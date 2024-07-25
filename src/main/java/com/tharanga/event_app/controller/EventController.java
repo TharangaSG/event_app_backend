@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tharanga.event_app.domain.dto.EventDto;
+import com.tharanga.event_app.domain.dto.EventPageResponse;
 import com.tharanga.event_app.services.EventService;
+import com.tharanga.event_app.utils.AppConstant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +63,22 @@ public class EventController {
     @DeleteMapping("/delete/{eventId}")
     public ResponseEntity<String> deleteEvent(@PathVariable Long eventId) throws IOException {
         return ResponseEntity.ok(eventService.deleteEvent(eventId));
+    }
+
+    @GetMapping("/allEventsPage")
+    public ResponseEntity<EventPageResponse> getEventsWithPagination(
+            @RequestParam(defaultValue = AppConstant.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstant.PAGE_SIZE, required = false) Integer pageSize){
+        return ResponseEntity.ok(eventService.getAllEventsWithPagination(pageNumber, pageSize));
+    }
+
+    @GetMapping("/allEventsPageSort")
+    public ResponseEntity<EventPageResponse> getEventWithPaginationAndSorting(
+            @RequestParam(defaultValue = AppConstant.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(defaultValue = AppConstant.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(defaultValue = AppConstant.SORT_BY, required = false) String sortBy,
+            @RequestParam(defaultValue = AppConstant.SORT_DIR, required = false) String dir
+    ) {
+        return ResponseEntity.ok(eventService.getAllEventsWithPaginationAndSorting(pageNumber, pageSize, sortBy, dir));
     }
 }
