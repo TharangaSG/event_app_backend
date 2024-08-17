@@ -34,19 +34,45 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="2" author="system">
-        <createTable tableName="attendee">
-            <column name="id" type="BIGINT" autoIncrement="true">
+
+    <changeSet id="3" author="system">
+        <createTable tableName="users">
+            <column name="user_id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
             <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ticket_type" type="VARCHAR(50)">
+            <column name="role" type="VARCHAR(50)">
                 <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="system">
+        <createTable tableName="refresh_token">
+            <column name="token_id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="refresh_token" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_refresh_token_user"
+                             references="users(user_id)"/>
             </column>
         </createTable>
     </changeSet>

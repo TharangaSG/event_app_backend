@@ -9,6 +9,7 @@ import com.tharanga.event_app.services.EventService;
 import com.tharanga.event_app.utils.AppConstant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,6 +43,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getEvent(eventId));
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(path="/all_events")
     public ResponseEntity<EventDto> createEvent(@RequestPart MultipartFile file,
                                                 @RequestPart String eventDto) throws IOException {
@@ -82,3 +84,8 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEventsWithPaginationAndSorting(pageNumber, pageSize, sortBy, dir));
     }
 }
+
+
+
+
+
