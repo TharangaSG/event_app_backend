@@ -77,5 +77,24 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="5" author="system">
+        <createTable tableName="forgot_password">
+            <column name="fpid" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="otp" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiration_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_forgot_password_user"
+                             references="users(user_id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 
 </databaseChangeLog>

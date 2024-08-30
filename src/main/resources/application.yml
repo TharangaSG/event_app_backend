@@ -15,6 +15,18 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "tmcolab1@gmail.com"
+    password: "zqts lviq fekp muxf"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   logging:
     level:
       org:
